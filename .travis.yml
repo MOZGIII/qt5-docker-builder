@@ -1,0 +1,19 @@
+# Force use of standard (not container-based) infrastructure
+sudo: required
+
+# Require docker support
+services:
+  - docker
+
+# Any language that supports docker will do
+language: ruby
+
+env:
+  matrix:
+    - BUILDER=qt5builder/ubuntu-16.04 BRANCH=5.7.0
+
+before_install:
+  ./build-containers.sh
+
+install:
+  ./build-qt.sh "$BUILDER" "$BRANCH"
