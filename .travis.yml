@@ -16,4 +16,4 @@ before_install:
   ./build-containers.sh
 
 install:
-  ./build-qt.sh "$BUILDER" "$BRANCH"
+  ./build-qt.sh "$BUILDER" "$BRANCH" > log.txt
