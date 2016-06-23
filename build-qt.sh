@@ -21,6 +21,9 @@ run_build_container() {
   docker run -it --rm --name "qt5-builder" -v "$SCRIPTS_DIR:/build-scripts" -v "$HOST_SOURCE_DIR:$DOCKER_SOURCE_DIR" $@
 }
 
+# Trace intersting stuff
+set -x
+
 mkdir -p $HOST_SOURCE_DIR
 run_build_container "$BUILDER_IMAGE_NAME" /bin/bash "/build-scripts/prepare-sources.sh $DOCKER_SOURCE_DIR" "$GIT_BRANCH"
 run_build_container "$BUILDER_IMAGE_NAME" /bin/bash "/build-scripts/build.sh $DOCKER_SOURCE_DIR $DOCKER_SOURCE_DIR"
