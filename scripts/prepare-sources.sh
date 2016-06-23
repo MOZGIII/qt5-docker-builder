@@ -41,8 +41,8 @@ if [[ "$PRESERVE_SOURCE_DIR" == "yes" ]]; then
   if ! clone; then
     echo "Clone failed, but it's ok; will do fetch + reset instead!"
     git fetch --depth=1 --recurse-submodules
-    git update-ref "refs/heads/$GIT_BRANCH" "origin/$GIT_BRANCH"
-    git reset --hard "$GIT_BRANCH"
+    git checkout -B "$GIT_BRANCH" "origin/$GIT_BRANCH"
+    git reset --hard
   fi
 else
   clone
