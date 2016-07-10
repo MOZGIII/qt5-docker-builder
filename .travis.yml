@@ -17,6 +17,6 @@ before_install:
   ./build-containers.sh
 
 install:
-  while true; do sleep 10; echo $(date); done &
+  while true; do sleep 10; date; ps -H; echo; done &
   ./build-qt.sh "$BUILDER" "$BRANCH" > log.txt
   kill %-1
