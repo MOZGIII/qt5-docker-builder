@@ -5,6 +5,14 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Read positional arguments
 BUILDER_IMAGE_NAME="$1"
 GIT_BRANCH="$2"
+
+# Ensure mandatory arguments are set
+if [[ -z "$BUILDER_IMAGE_NAME" || -z "$GIT_BRANCH" ]]; then
+  echo "Usage: $0 <builder image name> <qt git branch> [--preserve-source | --no-preserve-source]" >&2
+  exit 1
+fi
+
+# Roll args
 shift; shift
 
 # Read flags
@@ -13,12 +21,6 @@ while [[ $# -gt 0 ]]; do
   [[ "$1" == '--no-preserve-source' ]] && PRESERVE_SOURCE_DIR="no"
   shift
 done
-
-# Ensure mandatory arguments are set
-if [[ -z "$BUILDER_IMAGE_NAME" || -z "$GIT_BRANCH" ]]; then
-  echo "Usage: $0 <builder image name> <qt git branch> [--preserve-source | --no-preserve-source]" >&2
-  exit 1
-fi
 
 # Ensure optional parameters defaults are set
 : ${SCRIPTS_DIR:="$DIR/scripts"}
